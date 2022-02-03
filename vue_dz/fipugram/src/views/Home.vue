@@ -1,16 +1,27 @@
 <template>
-    <div class="jumbotron">
-  <h1 class="display-4">Hello, world!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-  <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-  </p>
-</div>
-
+  <div class="row">
+    <div class="col-2" id="left"></div>
+    <div class="col-7" id="middle">
+        <InstagramCard/>
+        <InstagramCard/>
+        <InstagramCard/>
+        <InstagramCard/>
+        <InstagramCard/>
+        <InstagramCard/>
+        
+    </div>
+    <div class="col-3" id="right">... ovdje ide desni stupac!</div>
+  </div>
 </template>
 
+<script>
+import InstagramCard from '../components/InstragramCard.vue'
 
+export default { 
+  name: 'home',
+  components: {
+    InstagramCard,
+  } 
+}
 
-
+</script>
