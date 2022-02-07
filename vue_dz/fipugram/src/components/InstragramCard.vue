@@ -12,14 +12,10 @@
           alt="random profile photo"
         />
       </div>
-      <div class="px-3 my-auto" id="UserName">UserName</div>
+      <div class="px-3 my-auto" id="UserName">{{ info.user }}</div>
     </div>
     <div class="card-body p-0">
-      <img
-        class="card-img-top"
-        src="https://picsum.photos/800"
-        alt="random photo"
-      />
+      <img class="card-img-top" :src="info.url" alt="random photo" />
     </div>
     <div class="card-footer bg-white">
       <!-- Icons container -->
@@ -82,12 +78,12 @@
       </div>
 
       <div class="justify-content-start d-flex" id="footerText">
-        <p id="UserName">UserName</p>
-        <p class="mx-1">description</p>
+        <p id="UserName">{{ info.user }}</p>
+        <p class="mx-1">{{ info.description }}</p>
       </div>
-      <small class="form-text text-muted text-left" id="footerText"
-        >An hour ago</small
-      >
+      <small class="form-text text-muted text-left" id="footerText">
+        {{ info.time }}
+      </small>
       <hr />
 
       <div class="form-group d-flex">
@@ -105,6 +101,7 @@
 
 <script>
 export default {
+  props: ["info"],
   name: "InstagramCard",
 };
 </script>
@@ -120,5 +117,6 @@ export default {
 
 #comment {
   resize: none;
+  border: none;
 }
 </style>

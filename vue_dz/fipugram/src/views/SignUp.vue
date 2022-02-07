@@ -1,6 +1,6 @@
 <template>
     <div class="about"></div>
-    <h1>This is an sign up page</h1>
+    <h1>This is a sign up page</h1>
     <div class="container">
         <div class="row">
             <div class="col-sm"></div>

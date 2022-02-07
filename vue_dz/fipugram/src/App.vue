@@ -31,6 +31,7 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input
+            v-model="store.searchTerm"
             class="form-control mx-sm-auto"
             type="search"
             placeholder="Pretraga"
@@ -40,11 +41,26 @@
       </div>
     </nav>
 
+    {{store.searchTerm}}
+
     <div class="container">
       <router-view />
     </div>
   </div>
 </template>
+
+<script>
+import store from './store.js'
+
+export default {
+  name: 'app',
+  data() {
+    return {
+      store,
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -73,4 +89,4 @@
 }
 </style>
 
-<script></script>
+
