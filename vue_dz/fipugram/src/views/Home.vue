@@ -2,7 +2,11 @@
   <div class="row">
     <div class="col-2" id="left"></div>
     <div class="col-7" id="middle">
-      <InstagramCard v-for="card in filteredCards" :key="card.url" :info="card" />
+      <InstagramCard
+        v-for="card in filteredCards"
+        :key="card.url"
+        :info="card"
+      />
     </div>
     <div class="col-3" id="right">
       <StoryCard />
@@ -49,14 +53,15 @@ export default {
   computed: {
     filteredCards() {
       let termin = this.store.searchTerm;
-      let newCards = [];
+      console.log(
+        this.cards.filter((card) => card.description.includes(termin))
+      );
 
-      for (let card of this.cards) {
-        if (card.description.indexOf(termin) >= 0) {
-          newCards.push(card);
-        }
-      }
-      return newCards;
+      return this.cards.filter(
+        (card) =>
+          card.description.includes(termin.toLowerCase()) ||
+          card.user.includes(termin.toLowerCase())
+      );
     },
   },
   components: {
