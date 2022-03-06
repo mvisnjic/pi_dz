@@ -28,6 +28,9 @@
           <li class="nav-item">
             <router-link to="/signup" class="nav-link">Sign Up</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/logout" class="nav-link">Logout</router-link>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input
@@ -41,7 +44,7 @@
       </div>
     </nav>
 
-    {{store.searchTerm}}
+    {{ store.searchTerm }}
 
     <div class="container">
       <router-view />
@@ -50,16 +53,25 @@
 </template>
 
 <script>
-import store from './store.js'
+import store from "./store.js";
+import { firebase } from "@/firebase";
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log(user.email);
+  } else {
+    console.log("User doesnt exists.");
+  }
+});
 
 export default {
-  name: 'app',
+  name: "app",
   data() {
     return {
       store,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style lang="scss">
@@ -73,7 +85,7 @@ export default {
 
 #nav {
   padding: 30px;
-  
+
   a {
     font-weight: bold;
     color: #2c3e50;
@@ -88,5 +100,3 @@ export default {
   display: block;
 }
 </style>
-
-
