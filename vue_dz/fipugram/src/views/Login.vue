@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.$router);
       firebase
         .auth()
         .signInWithEmailAndPassword(this.mail, this.password)

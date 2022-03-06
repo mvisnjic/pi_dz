@@ -22,14 +22,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item">
+          <li class="nav-item" v-if="!store.currentUser">
             <router-link to="/login" class="nav-link">Login</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" v-if="!store.currentUser">
             <router-link to="/signup" class="nav-link">Sign Up</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/logout" class="nav-link">Logout</router-link>
+          <li class="nav-item" v-if="!store.currentUser">
+            <a href="#" @click="logout" class="nav-link">Logout</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -59,8 +59,10 @@ import { firebase } from "@/firebase";
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log(user.email);
+    store.currentUser = user.email;
   } else {
     console.log("User doesnt exists.");
+    store.currentUser = null;
   }
 });
 
@@ -70,6 +72,16 @@ export default {
     return {
       store,
     };
+  },
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.push({ name: "Login" });
+        });
+    },
   },
 };
 </script>
