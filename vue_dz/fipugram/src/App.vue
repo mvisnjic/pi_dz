@@ -22,14 +22,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item" v-if="!store.currentUser">
-            <router-link to="/login" class="nav-link">Login</router-link>
+          <li v-if="!store.currentUser" class="nav-item">
+            <router-link to="/Login" class="nav-link">Login</router-link>
           </li>
-          <li class="nav-item" v-if="!store.currentUser">
-            <router-link to="/signup" class="nav-link">Sign Up</router-link>
+          <li v-if="!store.currentUser" class="nav-item">
+            <router-link to="/Signup" class="nav-link">Sign Up</router-link>
           </li>
-          <li class="nav-item" v-if="!store.currentUser">
-            <a href="#" @click="logout" class="nav-link">Logout</a>
+          <li v-if="store.currentUser" class="nav-item">
+            <a href="#" @click.prevent="logout()" class="nav-link">Logout</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -58,11 +58,12 @@ import { firebase } from "@/firebase";
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log(user.email);
     store.currentUser = user.email;
+    console.log(store.currentUser);
   } else {
-    console.log("User doesnt exists.");
     store.currentUser = null;
+    console.log("User doesn't exists.");
+    console.log(store.currentUser);
   }
 });
 
@@ -80,6 +81,7 @@ export default {
         .signOut()
         .then(() => {
           this.$router.push({ name: "Login" });
+          store.currentUser = null;
         });
     },
   },
